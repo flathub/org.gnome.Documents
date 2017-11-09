@@ -1,7 +1,7 @@
 {
     "app-id": "org.gnome.Documents",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.24",
+    "runtime-version": "3.26",
     "branch": "stable",
     "sdk": "org.gnome.Sdk",
     "command": "gnome-documents",
@@ -43,8 +43,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.24/gnome-online-accounts-3.24.0.tar.xz",
-                    "sha256": "9e2f780e061641dfd692cc82269b0cac6cce73c74ce2d8a0a5e80889ed07c17b"
+                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.26/gnome-online-accounts-3.26.0.tar.xz",
+                    "sha256": "5cab736751c19efca762c0459e3358255d6662a6f4f27728cd02ea7b024e52ac"
                 }
             ]
         },
@@ -54,8 +54,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-desktop/3.24/gnome-desktop-3.24.1.tar.xz",
-                    "sha256": "de09b7d38b4baccae48c527778480731cb12f00848758be186971b2b4acc45ab"
+                    "url": "https://download.gnome.org/sources/gnome-desktop/3.26/gnome-desktop-3.26.2.tar.xz",
+                    "sha256": "f7561a7a313fc474b2c390cd9696df1f5c1e1556080e43f4afe042b1060e5f2a"
                 }
             ]
         },
@@ -75,8 +75,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.8.tar.xz",
-                    "sha256": "e5e735bfac219c6cbe4a14df481cb3cb4b1c4b8b5e70f9a105a884035bc3a161"
+                    "url": "https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.9.tar.xz",
+                    "sha256": "85c4f7674c0098ffaf060ae01b6b832cb277b3673d54ace3bdedaad6b127453a"
                 }
             ]
         },
@@ -85,8 +85,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://git.gnome.org/browse/librest/snapshot/librest-librest-0.7.12.tar.xz",
-                    "sha256": "570917e570e6e8bf55572eb04902d4cf3975c2629df9df96c21be2059d71dab9"
+                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.1.tar.xz",
+                    "sha256": "0513aad38e5d3cedd4ae3c551634e3be1b9baaa79775e53b2dba9456f15b01c9"
                 }
             ]
         },
@@ -107,20 +107,22 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://poppler.freedesktop.org/poppler-data-0.4.7.tar.gz",
-                    "sha256": "e752b0d88a7aba54574152143e7bf76436a7ef51977c55d6bd9a48dccde3a7de"
+                    "url": "http://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz",
+                    "sha256": "1096a18161f263cccdc6d8a2eb5548c41ff8fcf9a3609243f1b6296abdf72872"
                 }
             ]
         },
         {
             "name": "poppler",
-            "config-opts": [ "--disable-libopenjpeg" ],
+            "buildsystem": "cmake-ninja",
+            "config-opts": ["-DCMAKE_INSTALL_LIBDIR=/app/lib", "-DCMAKE_INSTALL_INCLUDEDIR=/app/include",
+                            "-DENABLE_LIBOPENJPEG=none"],
             "cleanup": [ "/bin" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://poppler.freedesktop.org/poppler-0.36.0.tar.xz",
-                    "sha256": "93cc067b23c4ef7421380d3e8bd7c940b2027668446750787d7c1cb42720248e"
+                    "url": "http://poppler.freedesktop.org/poppler-0.61.0.tar.xz",
+                    "sha256": "53cde17a2afa3b73eb8b209d24e4369b52bfac444065dbb0a8cbcc7356582b7f"
                 }
             ]
         },
@@ -133,8 +135,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evince/3.24/evince-3.24.0.tar.xz",
-                    "sha256": "043895af7bbd6f1b57f9ab8778e78cf9c0af5dfcc347eaa94a17bf864c04dc8f"
+                    "url": "https://download.gnome.org/sources/evince/3.26/evince-3.26.0.tar.xz",
+                    "sha256": "79567bdb743cf0c3ed7b638da32afc9b850298f9b4edd532455df4a7e2a4c9d8"
                 }
             ]
         },
@@ -149,8 +151,19 @@
             "sources": [
                 {
                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker/1.10/tracker-1.12.0.tar.xz",
-                    "sha256": "83193dd8c05e3e8b05fa8f1cfb80964fa78f7aeb86f3302fa4be6ec7e6ff596f"
+                    "url": "https://download.gnome.org/sources/tracker/2.0/tracker-2.0.1.tar.xz",
+                    "sha256": "ac5c9f4dbb0741af5877ae2818d8c053aa9a431477a924a17976bb7e44411e47"
+                }
+            ]
+        },
+        {
+            "name": "tracker-miners",
+            "config-opts": [ ],
+            "sources": [
+                {
+                   "type": "archive",
+                    "url": "https://download.gnome.org/sources/tracker-miners/2.0/tracker-miners-2.0.2.tar.xz",
+                    "sha256": "cf417ece944c997f630dda41a7f5c449d609fa53dbb34fae7caa4c7af1e0e8ef"
                 }
             ]
         },
@@ -159,8 +172,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/libgepub/0.4/libgepub-0.4.tar.xz",
-                    "sha256": "5666a1c4d186d205bd2d91b71d4c1cd5426025569114a765dd913a564f149ff4"
+                    "url": "https://download.gnome.org/sources/libgepub/0.5/libgepub-0.5.2.tar.xz",
+                    "sha256": "848328999285441739a18664f62e8008aef8d87d1da00aeb91138035fc672b38"
                 }
             ]
         },
@@ -170,8 +183,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-documents/3.24/gnome-documents-3.24.1.tar.xz",
-                    "sha256": "a34d1366a7fa86458ca8a9fb76adcbb6ad0f609fa2458adab60b066f1b03c57e"
+                    "url": "https://download.gnome.org/sources/gnome-documents/3.26/gnome-documents-3.26.1.tar.xz",
+                    "sha256": "ba0d3084359d666b90733bb43206d24190fa85304bfe45f674ab6e6a27cb7fc9"
                 }
             ]
         }
