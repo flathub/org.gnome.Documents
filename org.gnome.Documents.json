@@ -1,0 +1,179 @@
+{
+    "app-id": "org.gnome.Documents",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.24",
+    "branch": "stable",
+    "sdk": "org.gnome.Sdk",
+    "command": "gnome-documents",
+    "finish-args": [
+        /* X11 + XShm access */
+        "--share=ipc", "--socket=x11",
+        /* Wayland access */
+        "--socket=wayland",
+        /* Access to users documents */
+        "--filesystem=xdg-documents", "--filesystem=xdg-download",
+        /* Needs to talk to the network: */
+        "--share=network",
+        /* Tracker access */
+        "--talk-name=org.freedesktop.Tracker1",
+        "--talk-name=org.freedesktop.Tracker1.Miner.Extract",
+        /* Needed for dconf to work */
+        "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+    ],
+    "build-options" : {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g",
+        "env": {
+            "V": "1",
+            "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
+            "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
+        }
+    },
+    "cleanup": ["/include", "/lib/pkgconfig",
+                "/share/pkgconfig", "/share/aclocal",
+                "/man", "/share/man", "/share/gtk-doc",
+                "/share/vala",
+                "*.la", "*.a",
+                "/bin/gnome-books"],
+    "modules": [
+        {
+            "name": "gnome-online-accounts",
+            "config-opts": ["--disable-telepathy", "--disable-documentation", "--disable-backend"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.24/gnome-online-accounts-3.24.0.tar.xz",
+                    "sha256": "9e2f780e061641dfd692cc82269b0cac6cce73c74ce2d8a0a5e80889ed07c17b"
+                }
+            ]
+        },
+        {
+            "name": "gnome-desktop",
+            "config-opts": ["--disable-debug-tools", "--disable-udev"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gnome-desktop/3.24/gnome-desktop-3.24.1.tar.xz",
+                    "sha256": "de09b7d38b4baccae48c527778480731cb12f00848758be186971b2b4acc45ab"
+                }
+            ]
+        },
+        {
+            "name": "liboauth",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://netix.dl.sourceforge.net/project/liboauth/liboauth-1.0.3.tar.gz",
+                    "sha256": "0df60157b052f0e774ade8a8bac59d6e8d4b464058cc55f9208d72e41156811f"
+                }
+            ]
+        },
+        {
+            "name": "libgdata",
+            "config-opts": ["--disable-always-build-tests", "--disable-Werror", "--disable-static" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.8.tar.xz",
+                    "sha256": "e5e735bfac219c6cbe4a14df481cb3cb4b1c4b8b5e70f9a105a884035bc3a161"
+                }
+            ]
+        },
+        {
+            "name": "librest",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://git.gnome.org/browse/librest/snapshot/librest-librest-0.7.12.tar.xz",
+                    "sha256": "570917e570e6e8bf55572eb04902d4cf3975c2629df9df96c21be2059d71dab9"
+                }
+            ]
+        },
+        {
+            "name": "libzapojit",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libzapojit/0.0/libzapojit-0.0.3.tar.xz",
+                    "sha256": "3d25f99329105abb99d1e9651b0aa1842065456ea54c22970a7330e9f3d1c37e"
+                }
+            ]
+        },
+        {
+            "name": "popplerdata",
+            "no-autogen": true,
+            "make-install-args": ["prefix=/app"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://poppler.freedesktop.org/poppler-data-0.4.7.tar.gz",
+                    "sha256": "e752b0d88a7aba54574152143e7bf76436a7ef51977c55d6bd9a48dccde3a7de"
+                }
+            ]
+        },
+        {
+            "name": "poppler",
+            "config-opts": [ "--disable-libopenjpeg" ],
+            "cleanup": [ "/bin" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://poppler.freedesktop.org/poppler-0.36.0.tar.xz",
+                    "sha256": "93cc067b23c4ef7421380d3e8bd7c940b2027668446750787d7c1cb42720248e"
+                }
+            ]
+        },
+        {
+            "name": "evince",
+            "cleanup": [ "/share/GConf", "/share/help" ],
+            "config-opts": [ "--disable-nautilus", "--disable-viewer",
+                             "--disable-previewer", "--disable-dbus",
+                             "--disable-browser-plugin", "--enable-introspection" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/evince/3.24/evince-3.24.0.tar.xz",
+                    "sha256": "043895af7bbd6f1b57f9ab8778e78cf9c0af5dfcc347eaa94a17bf864c04dc8f"
+                }
+            ]
+        },
+        {
+            "name": "tracker",
+            "cleanup": [ "/bin", "/etc", "/libexec" ],
+            "config-opts": [ "--disable-miner-apps", "--disable-static",
+                             "--disable-tracker-extract", "--disable-tracker-needle",
+                             "--disable-tracker-preferences", "--disable-artwork",
+                             "--disable-tracker-writeback", "--disable-miner-user-guides",
+                             "--with-bash-completion-dir=no"],
+            "sources": [
+                {
+                   "type": "archive",
+                    "url": "https://download.gnome.org/sources/tracker/1.10/tracker-1.12.0.tar.xz",
+                    "sha256": "83193dd8c05e3e8b05fa8f1cfb80964fa78f7aeb86f3302fa4be6ec7e6ff596f"
+                }
+            ]
+        },
+        {
+            "name": "libgepub",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libgepub/0.4/libgepub-0.4.tar.xz",
+                    "sha256": "5666a1c4d186d205bd2d91b71d4c1cd5426025569114a765dd913a564f149ff4"
+                }
+            ]
+        },
+        {
+            "name": "gnome-documents",
+            "config-opts": [ "--disable-documentation"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gnome-documents/3.24/gnome-documents-3.24.1.tar.xz",
+                    "sha256": "a34d1366a7fa86458ca8a9fb76adcbb6ad0f609fa2458adab60b066f1b03c57e"
+                }
+            ]
+        }
+    ]
+}
