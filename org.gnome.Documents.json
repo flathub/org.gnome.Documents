@@ -1,7 +1,7 @@
 {
     "app-id": "org.gnome.Documents",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.26",
+    "runtime-version": "3.28",
     "branch": "stable",
     "sdk": "org.gnome.Sdk",
     "command": "gnome-documents",
@@ -25,9 +25,7 @@
         "cflags": "-O2 -g",
         "cxxflags": "-O2 -g",
         "env": {
-            "V": "1",
-            "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
-            "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
+            "V": "1"
         }
     },
     "cleanup": ["/include", "/lib/pkgconfig",
@@ -43,8 +41,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.26/gnome-online-accounts-3.26.0.tar.xz",
-                    "sha256": "5cab736751c19efca762c0459e3358255d6662a6f4f27728cd02ea7b024e52ac"
+                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.28/gnome-online-accounts-3.28.0.tar.xz",
+                    "sha256": "87bc4ef307604f1ce4f09f6e5c9996ef8d37ca5e0a3bf76f6b27d71844adb40c"
                 }
             ]
         },
@@ -54,8 +52,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-desktop/3.26/gnome-desktop-3.26.2.tar.xz",
-                    "sha256": "f7561a7a313fc474b2c390cd9696df1f5c1e1556080e43f4afe042b1060e5f2a"
+                    "url": "https://download.gnome.org/sources/gnome-desktop/3.28/gnome-desktop-3.28.2.tar.xz",
+                    "sha256": "605087bff17c61bc167ccb5a61ed4d06eab922fcce384576ed2a3577214c8330"
                 }
             ]
         },
@@ -107,8 +105,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz",
-                    "sha256": "1096a18161f263cccdc6d8a2eb5548c41ff8fcf9a3609243f1b6296abdf72872"
+                    "url": "https://poppler.freedesktop.org/poppler-data-0.4.9.tar.gz",
+                    "sha256": "1f9c7e7de9ecd0db6ab287349e31bf815ca108a5a175cf906a90163bdbe32012"
                 }
             ]
         },
@@ -121,8 +119,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://poppler.freedesktop.org/poppler-0.61.0.tar.xz",
-                    "sha256": "53cde17a2afa3b73eb8b209d24e4369b52bfac444065dbb0a8cbcc7356582b7f"
+                    "url": "https://poppler.freedesktop.org/poppler-0.64.0.tar.xz",
+                    "sha256": "b21df92ca99f78067785cf2dc8e06deb04726b62389c0ee1f5d8b103c77f64b1"
                 }
             ]
         },
@@ -131,12 +129,13 @@
             "cleanup": [ "/share/GConf", "/share/help" ],
             "config-opts": [ "--disable-nautilus", "--disable-viewer",
                              "--disable-previewer", "--disable-dbus",
-                             "--disable-browser-plugin", "--enable-introspection" ],
+                             "--disable-browser-plugin", "--enable-introspection",
+                             "--disable-comics" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evince/3.26/evince-3.26.0.tar.xz",
-                    "sha256": "79567bdb743cf0c3ed7b638da32afc9b850298f9b4edd532455df4a7e2a4c9d8"
+                    "url": "https://download.gnome.org/sources/evince/3.28/evince-3.28.2.tar.xz",
+                    "sha256": "0955d22d85c9f6d322b6cbb464f1cc4c352db619017ec95dad4cc5c3440f73e1"
                 }
             ]
         },
@@ -150,9 +149,9 @@
                              "--with-bash-completion-dir=no"],
             "sources": [
                 {
-                   "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker/2.0/tracker-2.0.1.tar.xz",
-                    "sha256": "ac5c9f4dbb0741af5877ae2818d8c053aa9a431477a924a17976bb7e44411e47"
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/tracker/2.0/tracker-2.0.3.tar.xz",
+                    "sha256": "5a2fb274c128ec67a920944937b5147ceaf5db16fef6691ea22c4cb841e20580"
                 }
             ]
         },
@@ -161,30 +160,32 @@
             "config-opts": [ ],
             "sources": [
                 {
-                   "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker-miners/2.0/tracker-miners-2.0.2.tar.xz",
-                    "sha256": "cf417ece944c997f630dda41a7f5c449d609fa53dbb34fae7caa4c7af1e0e8ef"
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/tracker-miners/2.0/tracker-miners-2.0.4.tar.xz",
+                    "sha256": "4626646167e405be5f8b3f831c82cfcdf86ba20d3598fca41ea8c4a8b8a8e956"
                 }
             ]
         },
         {
             "name": "libgepub",
+            "buildsystem": "meson",
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/libgepub/0.5/libgepub-0.5.2.tar.xz",
-                    "sha256": "848328999285441739a18664f62e8008aef8d87d1da00aeb91138035fc672b38"
+                    "url": "https://download.gnome.org/sources/libgepub/0.6/libgepub-0.6.0.tar.xz",
+                    "sha256": "c78a395cc1d9c57b4485958ed83ffb96ed442750cfafa7797dd6d986b9f7b399"
                 }
             ]
         },
         {
             "name": "gnome-documents",
-            "config-opts": [ "--disable-documentation"],
+            "buildsystem": "meson",
+            "config-opts": [ "-Denable-documentation=false" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-documents/3.26/gnome-documents-3.26.1.tar.xz",
-                    "sha256": "ba0d3084359d666b90733bb43206d24190fa85304bfe45f674ab6e6a27cb7fc9"
+                    "url": "https://download.gnome.org/sources/gnome-documents/3.28/gnome-documents-3.28.0.tar.xz",
+                    "sha256": "0a320e9713c2ebbf345f9865e19ba7a4e56ecc144da3bdd74000c8345f2a989c"
                 }
             ]
         }
