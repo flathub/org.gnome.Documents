@@ -41,8 +41,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.28/gnome-online-accounts-3.28.0.tar.xz",
-                    "sha256": "87bc4ef307604f1ce4f09f6e5c9996ef8d37ca5e0a3bf76f6b27d71844adb40c"
+                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.30/gnome-online-accounts-3.30.0.tar.xz",
+                    "sha256": "27d9d88942aa02a1f8d003dfe515483d8483f216ba1e297a8ef67a42cf4bcfc3"
                 }
             ]
         },
@@ -52,8 +52,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-desktop/3.28/gnome-desktop-3.28.2.tar.xz",
-                    "sha256": "605087bff17c61bc167ccb5a61ed4d06eab922fcce384576ed2a3577214c8330"
+                    "url": "https://download.gnome.org/sources/gnome-desktop/3.30/gnome-desktop-3.30.0.tar.xz",
+                    "sha256": "45494f6af18d9125a0fd1024f7442fcc5d3219fca79527d4aa1906e37af795fd"
                 }
             ]
         },
@@ -118,9 +118,37 @@
             "cleanup": [ "/bin" ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-0.64.0.tar.xz",
-                    "sha256": "b21df92ca99f78067785cf2dc8e06deb04726b62389c0ee1f5d8b103c77f64b1"
+                    "type" : "archive",
+                    "url" : "https://poppler.freedesktop.org/poppler-0.68.0.tar.xz",
+                    "sha256" : "f90d04f0fb8df6923ecb0f106ae866cf9f8761bb537ddac64dfb5322763d0e58"
+                }
+            ]
+        },
+        {
+            "name" : "gspell",
+            "cleanup" : [
+                "/bin"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://download.gnome.org/sources/gspell/1.8/gspell-1.8.1.tar.xz",
+                    "sha256" : "819a1d23c7603000e73f5e738bdd284342e0cd345fb0c7650999c31ec741bbe5"
+                }
+            ],
+            "modules" : [
+                {
+                    "name" : "enchant2",
+                    "cleanup" : [
+                        "/bin"
+                    ],
+                    "sources" : [
+                        {
+                            "type" : "archive",
+                            "url" : "https://github.com/AbiWord/enchant/releases/download/v2.2.3/enchant-2.2.3.tar.gz",
+                            "sha256" : "abd8e915675cff54c0d4da5029d95c528362266557c61c7149d53fa069b8076d"
+                        }
+                    ]
                 }
             ]
         },
@@ -134,8 +162,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evince/3.28/evince-3.28.2.tar.xz",
-                    "sha256": "0955d22d85c9f6d322b6cbb464f1cc4c352db619017ec95dad4cc5c3440f73e1"
+                    "url": "https://download.gnome.org/sources/evince/3.30/evince-3.30.0.tar.xz",
+                    "sha256": "cbd02d1c515fd7f17af1c96935e456d6ccba4d612d2d972a12079cc6b24e8cb9"
                 }
             ]
         },
@@ -150,19 +178,18 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker/2.0/tracker-2.0.3.tar.xz",
-                    "sha256": "5a2fb274c128ec67a920944937b5147ceaf5db16fef6691ea22c4cb841e20580"
+                    "url": "https://download.gnome.org/sources/tracker/2.1/tracker-2.1.4.tar.xz",
+                    "sha256": "5d3f27da49d3e8ceafd2049b0fd5c3ff3ca43cda199c792652ce5ed3e847c575"
                 }
             ]
         },
         {
             "name": "tracker-miners",
-            "config-opts": [ ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker-miners/2.0/tracker-miners-2.0.4.tar.xz",
-                    "sha256": "4626646167e405be5f8b3f831c82cfcdf86ba20d3598fca41ea8c4a8b8a8e956"
+                    "url": "https://download.gnome.org/sources/tracker-miners/2.1/tracker-miners-2.1.4.tar.xz",
+                    "sha256": "318854ca001c90d0a84cb863c6c7a5bbfa056bff5803a95e40768fa808fdd3d5"
                 }
             ]
         },
@@ -184,8 +211,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-documents/3.28/gnome-documents-3.28.0.tar.xz",
-                    "sha256": "0a320e9713c2ebbf345f9865e19ba7a4e56ecc144da3bdd74000c8345f2a989c"
+                    "url": "https://download.gnome.org/sources/gnome-documents/3.30/gnome-documents-3.30.0.tar.xz",
+                    "sha256": "066a4aba215926d5c5b0db1c083eba3e40c2a888c9017973af8faac4ae9c907d"
                 }
             ]
         }
