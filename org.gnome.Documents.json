@@ -1,7 +1,7 @@
 {
     "app-id": "org.gnome.Documents",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.28",
+    "runtime-version": "3.30",
     "branch": "stable",
     "sdk": "org.gnome.Sdk",
     "command": "gnome-documents",
@@ -10,8 +10,8 @@
         "--share=ipc", "--socket=x11",
         /* Wayland access */
         "--socket=wayland",
-        /* Access to users documents */
-        "--filesystem=xdg-documents", "--filesystem=xdg-download",
+        /* Read-only access to users documents */
+        "--filesystem=xdg-documents:ro", "--filesystem=xdg-download:ro",
         /* Needs to talk to the network: */
         "--share=network",
         /* Tracker access */
@@ -33,11 +33,21 @@
                 "/man", "/share/man", "/share/gtk-doc",
                 "/share/vala",
                 "*.la", "*.a",
-                "/bin/gnome-books"],
+                "/bin/gnome-documents"],
     "modules": [
         {
+            "name": "librest",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.1.tar.xz",
+                    "sha256": "0513aad38e5d3cedd4ae3c551634e3be1b9baaa79775e53b2dba9456f15b01c9"
+                }
+            ]
+        },
+        {
             "name": "gnome-online-accounts",
-            "config-opts": ["--disable-telepathy", "--disable-documentation", "--disable-backend"],
+            "config-opts": ["--disable-telepathy", "--disable-documentation", "--disable-backend", "--disable-Werror" ],
             "sources": [
                 {
                     "type": "archive",
@@ -52,13 +62,14 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-desktop/3.30/gnome-desktop-3.30.0.tar.xz",
-                    "sha256": "45494f6af18d9125a0fd1024f7442fcc5d3219fca79527d4aa1906e37af795fd"
+                    "url": "https://download.gnome.org/sources/gnome-desktop/3.30/gnome-desktop-3.30.1.tar.xz",
+                    "sha256": "1383703bedd71204e4a161fb163905410c8f651890f18b3fa8405506ba97789f"
                 }
             ]
         },
         {
             "name": "liboauth",
+            "config-opts": [ "--enable-nss" ],
             "sources": [
                 {
                     "type": "archive",
@@ -75,16 +86,6 @@
                     "type": "archive",
                     "url": "https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.9.tar.xz",
                     "sha256": "85c4f7674c0098ffaf060ae01b6b832cb277b3673d54ace3bdedaad6b127453a"
-                }
-            ]
-        },
-        {
-            "name": "librest",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.1.tar.xz",
-                    "sha256": "0513aad38e5d3cedd4ae3c551634e3be1b9baaa79775e53b2dba9456f15b01c9"
                 }
             ]
         },
@@ -113,42 +114,32 @@
         {
             "name": "poppler",
             "buildsystem": "cmake-ninja",
-            "config-opts": ["-DCMAKE_INSTALL_LIBDIR=/app/lib", "-DCMAKE_INSTALL_INCLUDEDIR=/app/include",
-                            "-DENABLE_LIBOPENJPEG=none"],
-            "cleanup": [ "/bin" ],
+            "config-opts": [
+                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
+                "-DCMAKE_INSTALL_INCLUDEDIR=/app/include",
+                "-DENABLE_LIBOPENJPEG=none"
+            ],
+            "cleanup": [
+                "/bin"
+            ],
             "sources": [
                 {
-                    "type" : "archive",
-                    "url" : "https://poppler.freedesktop.org/poppler-0.68.0.tar.xz",
-                    "sha256" : "f90d04f0fb8df6923ecb0f106ae866cf9f8761bb537ddac64dfb5322763d0e58"
+                    "type": "archive",
+                    "url": "https://poppler.freedesktop.org/poppler-0.69.0.tar.xz",
+                    "sha256": "637ff943f805f304ff1da77ba2e7f1cbd675f474941fd8ae1e0fc01a5b45a3f9"
                 }
             ]
         },
         {
-            "name" : "gspell",
-            "cleanup" : [
+            "name": "gspell",
+            "cleanup": [
                 "/bin"
             ],
-            "sources" : [
+            "sources": [
                 {
-                    "type" : "archive",
-                    "url" : "https://download.gnome.org/sources/gspell/1.8/gspell-1.8.1.tar.xz",
-                    "sha256" : "819a1d23c7603000e73f5e738bdd284342e0cd345fb0c7650999c31ec741bbe5"
-                }
-            ],
-            "modules" : [
-                {
-                    "name" : "enchant2",
-                    "cleanup" : [
-                        "/bin"
-                    ],
-                    "sources" : [
-                        {
-                            "type" : "archive",
-                            "url" : "https://github.com/AbiWord/enchant/releases/download/v2.2.3/enchant-2.2.3.tar.gz",
-                            "sha256" : "abd8e915675cff54c0d4da5029d95c528362266557c61c7149d53fa069b8076d"
-                        }
-                    ]
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gspell/1.8/gspell-1.8.1.tar.xz",
+                    "sha256": "819a1d23c7603000e73f5e738bdd284342e0cd345fb0c7650999c31ec741bbe5"
                 }
             ]
         },
@@ -158,38 +149,50 @@
             "config-opts": [ "--disable-nautilus", "--disable-viewer",
                              "--disable-previewer", "--disable-dbus",
                              "--disable-browser-plugin", "--enable-introspection",
-                             "--disable-comics" ],
+                             "--enable-comics" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evince/3.30/evince-3.30.0.tar.xz",
-                    "sha256": "cbd02d1c515fd7f17af1c96935e456d6ccba4d612d2d972a12079cc6b24e8cb9"
+                    "url": "https://download.gnome.org/sources/evince/3.30/evince-3.30.1.tar.xz",
+                    "sha256": "abc5516848e743bd79645e9693250974ffd5235617dd746c83b67c4c671ac0b7"
                 }
             ]
         },
         {
-            "name": "tracker",
-            "cleanup": [ "/bin", "/etc", "/libexec" ],
-            "config-opts": [ "--disable-miner-apps", "--disable-static",
-                             "--disable-tracker-extract", "--disable-tracker-needle",
-                             "--disable-tracker-preferences", "--disable-artwork",
-                             "--disable-tracker-writeback", "--disable-miner-user-guides",
-                             "--with-bash-completion-dir=no"],
-            "sources": [
+            "name" : "tracker",
+            "config-opts" : [
+                "--disable-miner-apps",
+                "--disable-static",
+                "--disable-tracker-extract",
+                "--disable-tracker-needle",
+                "--disable-tracker-preferences",
+                "--disable-artwork",
+                "--disable-tracker-writeback",
+                "--disable-miner-user-guides",
+                "--with-bash-completion-dir=no"
+            ],
+            "sources" : [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker/2.1/tracker-2.1.4.tar.xz",
-                    "sha256": "5d3f27da49d3e8ceafd2049b0fd5c3ff3ca43cda199c792652ce5ed3e847c575"
+                    "type" : "archive",
+                    "url" : "https://download.gnome.org/sources/tracker/2.1/tracker-2.1.5.tar.xz",
+                    "sha256" : "b234b7573773b904dc3e885ff5ec44e86b035767cde783bc50d65d12cd72861e"
                 }
             ]
         },
         {
             "name": "tracker-miners",
+            "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec" ],
+            "config-opts": [ "--disable-miner-apps",
+                             "--disable-miner-rss",
+                             "--disable-static",
+                             "--disable-tracker-extract",
+                             "--disable-tracker-writeback",
+                             "--enable-miner-fs" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker-miners/2.1/tracker-miners-2.1.4.tar.xz",
-                    "sha256": "318854ca001c90d0a84cb863c6c7a5bbfa056bff5803a95e40768fa808fdd3d5"
+                    "url": "https://download.gnome.org/sources/tracker-miners/2.1/tracker-miners-2.1.5.tar.xz",
+                    "sha256": "f5fd3d4b5573539554d5982ee8ecc10ea84f6693378c5bcc7b162096a63bb8cd"
                 }
             ]
         },
