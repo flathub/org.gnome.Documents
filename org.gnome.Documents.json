@@ -48,19 +48,20 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.30/gnome-online-accounts-3.30.0.tar.xz",
-                    "sha256": "27d9d88942aa02a1f8d003dfe515483d8483f216ba1e297a8ef67a42cf4bcfc3"
+                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.30/gnome-online-accounts-3.30.2.tar.xz",
+                    "sha256": "05c7e588c884a4145db376880303588f74b76d1fa11afbeccb74c6eff36b2fdc"
                 }
             ]
         },
         {
             "name": "gnome-desktop",
-            "config-opts": ["--disable-debug-tools", "--disable-udev"],
+            "config-opts": ["-Ddebug_tools=false", "-Dudev=disabled"],
+            "buildsystem": "meson",
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-desktop/3.30/gnome-desktop-3.30.1.tar.xz",
-                    "sha256": "1383703bedd71204e4a161fb163905410c8f651890f18b3fa8405506ba97789f"
+                    "url": "https://download.gnome.org/sources/gnome-desktop/3.32/gnome-desktop-3.32.0.tar.xz",
+                    "sha256": "a6393dc5fc29fc0652ac84c73b3da205d0b0168128c4cf6d27797a08f3d07b54"
                 }
             ]
         },
@@ -122,8 +123,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-0.69.0.tar.xz",
-                    "sha256": "637ff943f805f304ff1da77ba2e7f1cbd675f474941fd8ae1e0fc01a5b45a3f9"
+                    "url": "https://poppler.freedesktop.org/poppler-0.74.0.tar.xz",
+                    "sha256": "92e09fd3302567fd36146b36bb707db43ce436e8841219025a82ea9fb0076b2f"
                 }
             ]
         },
@@ -150,46 +151,40 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evince/3.30/evince-3.30.1.tar.xz",
-                    "sha256": "abc5516848e743bd79645e9693250974ffd5235617dd746c83b67c4c671ac0b7"
+                    "url": "https://download.gnome.org/sources/evince/3.32/evince-3.32.0.tar.xz",
+                    "sha256": "f0d977216466ed2f5a6de64476ef7113dc7c7c9832336f1ff07f3c03c5324c40"
                 }
             ]
         },
         {
-            "name" : "tracker",
-            "config-opts" : [
-                "--disable-miner-apps",
-                "--disable-static",
-                "--disable-tracker-extract",
-                "--disable-tracker-needle",
-                "--disable-tracker-preferences",
-                "--disable-artwork",
-                "--disable-tracker-writeback",
-                "--disable-miner-user-guides",
-                "--with-bash-completion-dir=no"
-            ],
+            "name": "tracker",
+            "buildsystem": "meson",
+            "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec", "/share/dbus-1/services" ],
+            "config-opts": [ "--default-library=shared", "-Dbash-completion=no", "-Ddocs=false" ],
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://download.gnome.org/sources/tracker/2.1/tracker-2.1.5.tar.xz",
-                    "sha256" : "b234b7573773b904dc3e885ff5ec44e86b035767cde783bc50d65d12cd72861e"
+                    "url" : "https://download.gnome.org/sources/tracker/2.2/tracker-2.2.1.tar.xz",
+                    "sha256" : "0ccef9e67440859119fa6cae230355c1b1b3485ac08122017c9499ad2dada2ff"
                 }
             ]
         },
         {
             "name": "tracker-miners",
+            "buildsystem": "meson",
             "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec" ],
-            "config-opts": [ "--disable-miner-apps",
-                             "--disable-miner-rss",
-                             "--disable-static",
-                             "--disable-tracker-extract",
-                             "--disable-tracker-writeback",
-                             "--enable-miner-fs" ],
+            "config-opts": [ "--default-library=shared",
+                             "-Dminer_apps=false",
+                             "-Dminer_rss=false",
+                             "-Dextract=false",
+                             "-Dgeneric_media_extractor=none",
+                             "-Dwriteback=false",
+                             "-Dminer_fs=true" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker-miners/2.1/tracker-miners-2.1.5.tar.xz",
-                    "sha256": "f5fd3d4b5573539554d5982ee8ecc10ea84f6693378c5bcc7b162096a63bb8cd"
+                    "url": "https://download.gnome.org/sources/tracker-miners/2.2/tracker-miners-2.2.1.tar.xz",
+                    "sha256": "190387ca7ccd278068d15cdb1d1cf08eae586dfbf30871ac6ab04b92525b72f5"
                 }
             ]
         },
@@ -211,8 +206,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-documents/3.30/gnome-documents-3.30.1.tar.xz",
-                    "sha256": "66191078f42adf50e4aa4cfba5a6564afd17e26f2c8fb3d71acd7b2ea29b0ffd"
+                    "url": "https://download.gnome.org/sources/gnome-documents/3.32/gnome-documents-3.32.0.tar.xz",
+                    "sha256": "cc2060843e53b6db3372b806536f5df0bfc7abd3c0c35cb5021a3592d76f0dbf"
                 }
             ]
         }
