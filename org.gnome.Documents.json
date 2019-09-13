@@ -1,8 +1,7 @@
 {
     "app-id": "org.gnome.Documents",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.32",
-    "branch": "stable",
+    "runtime-version": "3.34",
     "sdk": "org.gnome.Sdk",
     "command": "gnome-documents",
     "finish-args": [
@@ -17,15 +16,8 @@
         /* Tracker access */
         "--talk-name=org.freedesktop.Tracker1",
         "--talk-name=org.freedesktop.Tracker1.Miner.Extract",
-        /* Needed for dconf to work */
-        "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
-        "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+        "--metadata=X-DConf=migrate-path=/org/gnome/documents/"
     ],
-    "build-options" : {
-        "env": {
-            "V": "1"
-        }
-    },
     "cleanup": ["/include", "/lib/pkgconfig",
                 "/share/pkgconfig", "/share/aclocal",
                 "/man", "/share/man", "/share/gtk-doc",
@@ -48,8 +40,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.30/gnome-online-accounts-3.30.2.tar.xz",
-                    "sha256": "05c7e588c884a4145db376880303588f74b76d1fa11afbeccb74c6eff36b2fdc"
+                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.34/gnome-online-accounts-3.34.0.tar.xz",
+                    "sha256": "c44fbce4eeb54703a2ab4954d54f11eb29666f9cf61b5275b9fe0fc033377f57"
                 }
             ]
         },
@@ -60,8 +52,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-desktop/3.32/gnome-desktop-3.32.0.tar.xz",
-                    "sha256": "a6393dc5fc29fc0652ac84c73b3da205d0b0168128c4cf6d27797a08f3d07b54"
+                    "url": "https://download.gnome.org/sources/gnome-desktop/3.34/gnome-desktop-3.34.0.tar.xz",
+                    "sha256": "8d331ee655c1d56b2b97562a07c7a7598ff6706a11ff1cdce97423ebc6b62426"
                 }
             ]
         },
@@ -78,15 +70,24 @@
         },
         {
             "name": "libgdata",
-            "config-opts": ["--disable-always-build-tests", "--disable-Werror", "--disable-static" ],
+            "buildsystem": "meson",
+            "config-opts": [
+                 "-Dalways_build_tests=false",
+                 "-Dgtk=disabled",
+                 "-Dgtk_doc=false",
+                 "-Dinstalled_tests=false",
+                 "-Dintrospection=true",
+                 "-Dvapi=false"
+            ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.9.tar.xz",
-                    "sha256": "85c4f7674c0098ffaf060ae01b6b832cb277b3673d54ace3bdedaad6b127453a"
+                    "url": "https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.11.tar.xz",
+                    "sha256": "6b9917122e4def6e6f78bcb660e49e146540832e296abcb5cde99829a04ea986"
                 }
             ]
         },
+        "shared-modules/intltool/intltool-0.51.json",
         {
             "name": "libzapojit",
             "sources": [
@@ -136,8 +137,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gspell/1.8/gspell-1.8.1.tar.xz",
-                    "sha256": "819a1d23c7603000e73f5e738bdd284342e0cd345fb0c7650999c31ec741bbe5"
+                    "url": "https://download.gnome.org/sources/gspell/1.8/gspell-1.8.2.tar.xz",
+                    "sha256": "bb9195c3a95bacf556d0203e9691f7489e0d3bc5ae1e5a440c89b2f2435d3ed6"
                 }
             ]
         },
@@ -164,8 +165,8 @@
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://download.gnome.org/sources/tracker/2.2/tracker-2.2.1.tar.xz",
-                    "sha256" : "0ccef9e67440859119fa6cae230355c1b1b3485ac08122017c9499ad2dada2ff"
+                    "url" : "https://download.gnome.org/sources/tracker/2.2/tracker-2.2.2.tar.xz",
+                    "sha256" : "c6a73462f9aa9c32efa139003d2abd2ac5f70f8af6ce744729954975a661e2e6"
                 }
             ]
         },
@@ -183,8 +184,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker-miners/2.2/tracker-miners-2.2.1.tar.xz",
-                    "sha256": "190387ca7ccd278068d15cdb1d1cf08eae586dfbf30871ac6ab04b92525b72f5"
+                    "url": "https://download.gnome.org/sources/tracker-miners/2.2/tracker-miners-2.2.2.tar.xz",
+                    "sha256": "3c3688debc60d57e9239952078ed32f97735aa60ab39662a9568552595ea654e"
                 }
             ]
         },
