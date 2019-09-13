@@ -209,6 +209,10 @@
                     "type": "archive",
                     "url": "https://download.gnome.org/sources/gnome-documents/3.32/gnome-documents-3.32.0.tar.xz",
                     "sha256": "cc2060843e53b6db3372b806536f5df0bfc7abd3c0c35cb5021a3592d76f0dbf"
+                },
+                {
+                    "type": "patch",
+                    "path": "appdata_release.patch"
                 }
             ]
         }
